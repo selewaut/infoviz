@@ -18,15 +18,29 @@
     object {
       max-width: 100%;
     }
+    section + section {
+      margin-top: 3rem;
+    }
   </style>
 </head>
 <body>
-  <h1>Portfolio Visualization</h1>
-  <p>A tile chart of my portfolio, sized by each asset's value and colored by its daily change.</p>
+  <section>
+    <h1>Portfolio Visualization</h1>
+    <p>A tile chart of my portfolio, sized by each asset's value and colored by its daily change.</p>
 
-  <object type="image/svg+xml" data="./finance.svg">
-    <img src="./finance.svg" alt="Portfolio tile chart">
-  </object>
+    <object type="image/svg+xml" data="./images/finance.svg">
+      <img src="./images/finance.svg" alt="Portfolio tile chart">
+    </object>
+  </section>
+
+  <section>
+    <h1>Music Industry Revenues</h1>
+    <p>A streamgraph of inflation-adjusted music industry revenues by format, from vinyl and tape through disc, download, and streaming.</p>
+
+    <object type="image/svg+xml" data="./images/bumpchart.svg">
+      <img src="./images/bumpchart.svg" alt="Music industry revenue streamgraph">
+    </object>
+  </section>
 
 </body>
 </html>
