@@ -19,31 +19,38 @@ monthly["YearMonth"] = monthly["YearMonth"].astype(str)
 df = monthly.merge(ipc[["YearMonth", "Monthly_Pct"]], on="YearMonth", how="inner")
 df = df.rename(columns={"Monthly_Pct": "IPC_pct"})
 
-# --- Base 100 series ---
-# 1. TWR (portafolio en ARS)
-df["TWR_base100"] = (1 + df["TWR_pct"]/100) / (1 + df["TWR_pct"].iloc[0]/100) * 100
+# Retorno mensual del portafolio (desde el TWR acumulado)
+df["TWR_dec"] = df["TWR_pct"] / 100
+df["portfolio_monthly"] = (1 + df["TWR_dec"]) / (1 + df["TWR_dec"].shift(1)) - 1
+df.loc[0, "portfolio_monthly"] = df.loc[0, "TWR_dec"]
 
-# 2. Inflación (IPC)
-df["IPC_base100"] = (1 + df["IPC_pct"]/100).cumprod() / (1 + df["IPC_pct"].iloc[0]/100) * 100
+# Inflación mensual
+df["IPC_monthly"] = df["IPC_pct"] / 100
 
-# 3. Retorno real
-df["real_return"] = (1 + df["TWR_pct"]/100) / (1 + df["IPC_pct"]/100) - 1
-df["real_base100"] = (1 + df["real_return"]).cumprod() / (1 + df["real_return"].iloc[0]) * 100
+# Retorno real mensual
+df["real_monthly"] = (1 + df["portfolio_monthly"]) / (1 + df["IPC_monthly"]) - 1
 
-# 4. USD (MEP)
-df["MEP_base100"] = df["MEP"] / df["MEP"].iloc[0] * 100
+# Acumulados (desde el inicio del período)
+df["TWR_acumulado"] = (1 + df["portfolio_monthly"]).cumprod() - 1
+df["IPC_acumulado"] = (1 + df["IPC_monthly"]).cumprod() - 1
+df["real_acumulado"] = (1 + df["real_monthly"]).cumprod() - 1
 
-# Resultado final
+# A porcentaje
+for col in ["TWR_acumulado", "IPC_acumulado", "real_acumulado"]:
+    df[col] = (df[col] * 100).round(2)
+
+# USD en base 100
+df["MEP_base100"] = (df["MEP"] / df["MEP"].iloc[0] * 100).round(2)
+
+# Resultado final (todo en el mismo dataset)
 out = df[[
     "YearMonth",
-    "TWR_base100",
-    "IPC_base100",
-    "real_base100",
+    "TWR_acumulado",
+    "IPC_acumulado",
+    "real_acumulado",
     "MEP_base100",
-    "TWR_pct",
-    "IPC_pct",
     "MEP"
-]].round(2)
+]]
 
-out.to_csv("data/portafolio_base100_ars_usd_inflacion.csv", index=False)
+out.to_csv("data/portafolio_vs_inflacion_con_usd.csv", index=False)
 print(out.to_string(index=False))
