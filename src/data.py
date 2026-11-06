@@ -1,6 +1,6 @@
 import pandas as pd
 
-PORTFOLIO_CSV = "iol_portfolio_argentina.csv"
+PORTFOLIO_CSV = "data/financial_data/iol_portfolio_argentina.csv"
 
 
 def add_value_column(df: pd.DataFrame) -> pd.DataFrame:

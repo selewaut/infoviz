@@ -1,8 +1,8 @@
 import pandas as pd
 
 # Cargar datos
-aum = pd.read_csv("data/iol_aum_twr_daily_nov2025_oct2026.csv")
-ipc = pd.read_csv("data/ipc_indec_mensual_oct2025_sep2026.csv")
+aum = pd.read_csv("data/financial_data/iol_aum_twr_daily_nov2025_oct2026.csv")
+ipc = pd.read_csv("data/financial_data/ipc_indec_mensual_oct2025_sep2026.csv")
 
 aum["Date"] = pd.to_datetime(aum["Date"])
 aum = aum.dropna(subset=["TWR_Accumulated", "Valuation_MEP"]).sort_values("Date")
@@ -52,5 +52,5 @@ out = df[[
     "MEP"
 ]]
 
-out.to_csv("data/portafolio_vs_inflacion_con_usd.csv", index=False)
+out.to_csv("data/financial_data/portafolio_vs_inflacion_con_usd.csv", index=False)
 print(out.to_string(index=False))

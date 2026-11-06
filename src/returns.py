@@ -3,8 +3,8 @@ import numpy as np
 
 # 1. Cargar los datos
 # Ajustá las rutas a donde tengas los CSV
-aum_twr = pd.read_csv("data/iol_aum_twr_daily_nov2025_oct2026.csv")
-ipc = pd.read_csv("data/ipc_indec_mensual_oct2025_sep2026.csv")
+aum_twr = pd.read_csv("data/financial_data/iol_aum_twr_daily_nov2025_oct2026.csv")
+ipc = pd.read_csv("data/financial_data/ipc_indec_mensual_oct2025_sep2026.csv")
 
 # 2. Preparar TWR diario
 aum_twr["Date"] = pd.to_datetime(aum_twr["Date"])
@@ -45,5 +45,5 @@ for col in ["portfolio_return", "inflation", "real_return", "cum_portfolio", "cu
 print(result.to_string(index=False))
 
 # Guardar
-result.to_csv("comparacion_portafolio_vs_inflacion.csv", index=False)
-print("\nGuardado en: comparacion_portafolio_vs_inflacion.csv")
+result.to_csv("data/financial_data/comparacion_portafolio_vs_inflacion.csv", index=False)
+print("\nGuardado en: data/financial_data/comparacion_portafolio_vs_inflacion.csv")
