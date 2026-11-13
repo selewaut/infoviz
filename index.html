@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
-      max-width: 860px;
+      max-width: 1200px;
       margin: 2rem auto;
       padding: 0 1.5rem;
       color: #222;
@@ -15,8 +15,14 @@
     h1 {
       font-size: 1.6rem;
     }
+    h2 {
+      font-size: 1.25rem;
+      margin-top: 0;
+    }
     object {
-      max-width: 100%;
+      width: 100%;
+      height: auto;
+      display: block;
     }
     .flourish-embed {
       width: 100%;
@@ -27,33 +33,28 @@
   </style>
 </head>
 <body>
-  <section>
-    <h1>Portfolio Visualization</h1>
-    <p>A tile chart of my portfolio, sized by each asset's value and colored by its daily change.</p>
+  <header>
+    <h1>Santiago Elewaut — Portafolio de Visualizaciones de Datos</h1>
+  </header>
 
-    <object type="image/svg+xml" data="./images/finance.svg">
-      <img src="./images/finance.svg" alt="Portfolio tile chart">
+  <section>
+    <h2>¿Me fundí o ya me puedo jubilar hoy?</h2>
+    <p>¿Cómo rindió hoy la comitente en pesos?</p>
+
+    <object type="image/svg+xml" data="./images/FINANCE2.svg">
+      <img src="./images/FINANCE2.svg" alt="Portfolio tile chart">
     </object>
   </section>
 
   <section>
-    <h1>Rendimiento Pesos</h1>
+    <h2>Mis pesos: ¿corren o se quedan dormidos?</h2>
+    <p>¿Cómo viene la cuenta en lo que va del año?</p>
     <div class="flourish-embed flourish-chart" data-src="visualisation/30757619">
       <script src="https://public.flourish.studio/resources/embed.js"></script>
       <noscript>
         <img src="https://public.flourish.studio/visualisation/30757619/thumbnail" width="100%" alt="chart visualization">
       </noscript>
     </div>
-  </section>
-
-  <section>
-    <h1>Toppings on pizza male vs female</h1>
-    <div style="min-height:433px" id="datawrapper-vis-QkyKp"><script type="text/javascript" defer src="https://datawrapper.dwcdn.net/QkyKp/embed.js" charset="utf-8" data-target="#datawrapper-vis-QkyKp"></script><noscript><img src="https://datawrapper.dwcdn.net/QkyKp/full.png" alt="Toppings on pizza male vs female (Range Plot)" /></noscript></div>
-  </section>
-
-  <section>
-    <h1>Airbnb Listings</h1>
-    <div class='tableauPlaceholder' id='viz1794067336141' style='position: relative'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;li&#47;listingsairbnb&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='listingsairbnb&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;li&#47;listingsairbnb&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1794067336141');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.minWidth='1420px';vizElement.style.maxWidth='3320px';vizElement.style.width='100%';vizElement.style.minHeight='587px';vizElement.style.maxHeight='1387px';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.minWidth='1420px';vizElement.style.maxWidth='3320px';vizElement.style.width='100%';vizElement.style.minHeight='587px';vizElement.style.maxHeight='1387px';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';} else { vizElement.style.width='100%';vizElement.style.height='1427px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
   </section>
 
 </body>
