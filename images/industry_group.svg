@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="620" viewBox="0 0 1560 620"><style>svg { color: #374151; } #xAxis > text, #yAxis > text { display: none; } #grid rect { stroke: #E5E7EB; } #xAxis .domain, #yAxis .domain, #xAxis .tick line, #yAxis .tick line { stroke: #E5E7EB; } #xAxis .tick text, #yAxis .tick text { fill: #374151; font-size: 16px; }</style><rect width="1560" height="620" x="0" y="0" fill="#FFFFFF" id="background"/><g id="viz"><g transform="translate(0,0)"><g transform="translate(150,20)"><g class="bars"><rect id="undefined - Semiconductores" x="0" y="0.9982174688057057" height="38.93048128342246" width="1293.5538370600225" fill="#1e40af"><title>Semiconductores — 37,22% · ARS 48.999.070 · 3 posiciones · Principal: AMD</title></rect><rect id="undefined - Petróleo y gas" x="0" y="40.92691622103387" height="38.93048128342246" width="767.0655849104078" fill="#1e40af"><title>Petróleo y gas — 22,07% · ARS 29.056.000 · 4 posiciones · Principal: VIST</title></rect><rect id="undefined - ETF / Índice" x="0" y="80.85561497326204" height="38.93048128342246" width="493.7372233093063" fill="#1e40af"><title>ETF / Índice — 14,21% · ARS 18.702.480 · 1 posición · Principal: SPY</title></rect><rect id="undefined - Automotriz / EV" x="0" y="120.7843137254902" height="38.93048128342246" width="236.4439538156725" fill="#2563eb"><title>Automotriz / EV — 6,80% · ARS 8.956.360 · 1 posición · Principal: TSLA</title></rect><rect id="undefined - E-commerce" x="0" y="160.71301247771837" height="38.93048128342246" width="221.20903234004103" fill="#2563eb"><title>E-commerce — 6,37% · ARS 8.379.270 · 2 posiciones · Principal: MELI</title></rect><rect id="undefined - Internet" x="0" y="200.64171122994654" height="38.93048128342246" width="118.26844013159184" fill="#2563eb"><title>Internet — 3,40% · ARS 4.479.940 · 2 posiciones · Principal: GOOGL</title></rect><rect id="undefined - Bono soberano" x="0" y="240.57040998217468" height="38.93048128342246" width="86.13096872079946" fill="#2563eb"><title>Bono soberano — 2,48% · ARS 3.262.591 · 2 posiciones · Principal: GD30</title></rect><rect id="undefined - Hardware" x="0" y="280.49910873440285" height="38.93048128342246" width="73.94094069522531" fill="#2563eb"><title>Hardware — 2,13% · ARS 2.800.840 · 1 posición · Principal: AAPL</title></rect><rect id="undefined - Bebidas" x="0" y="320.427807486631" height="38.93048128342246" width="55.256388851331096" fill="#2563eb"><title>Bebidas — 1,59% · ARS 2.093.080 · 1 posición · Principal: KO</title></rect><rect id="undefined - Energía integrada" x="0" y="360.3565062388592" height="38.93048128342246" width="32.32988987612609" fill="#2563eb"><title>Energía integrada — 0,93% · ARS 1.224.638 · 1 posición · Principal: PAMP</title></rect><rect id="undefined - FCI renta variable" x="0" y="400.28520499108737" height="38.93048128342246" width="32.31453317144637" fill="#2563eb"><title>FCI renta variable — 0,93% · ARS 1.224.056 · 1 posición · Principal: PRTAVAB</title></rect><rect id="undefined - Otros" x="0" y="440.21390374331554" height="38.93048128342246" width="25.341265492375317" fill="#94a3b8"><title>Otros — 0,73% · ARS 959.912 · 4 posiciones · Principal: TECO2</title></rect><rect id="undefined - Bancos" x="0" y="480.14260249554366" height="38.93048128342246" width="20.23473394555787" fill="#2563eb"><title>Bancos — 0,58% · ARS 766.480 · 1 posición · Principal: GGAL</title></rect><rect id="undefined - Gas / Utilities" x="0" y="520.0713012477719" height="38.93048128342246" width="19.17320768009643" fill="#2563eb"><title>Gas / Utilities — 0,55% · ARS 726.270 · 1 posición · Principal: TGNO4</title></rect></g><g id="xAxis" transform="translate(0,560)" fill="none" font-size="10" font-family="sans-serif" text-anchor="middle"><path class="domain" stroke="currentColor" d="M0,6V0H1390V6"/><g class="tick" opacity="1" transform="translate(0,0)"><line stroke="currentColor" y2="6"/><text fill="currentColor" y="9" dy="0.71em">0</text></g><g class="tick" opacity="1" transform="translate(173.75,0)"><line stroke="currentColor" y2="6"/><text fill="currentColor" y="9" dy="0.71em">5</text></g><g class="tick" opacity="1" transform="translate(347.5,0)"><line stroke="currentColor" y2="6"/><text fill="currentColor" y="9" dy="0.71em">10</text></g><g class="tick" opacity="1" transform="translate(521.25,0)"><line stroke="currentColor" y2="6"/><text fill="currentColor" y="9" dy="0.71em">15</text></g><g class="tick" opacity="1" transform="translate(695,0)"><line stroke="currentColor" y2="6"/><text fill="currentColor" y="9" dy="0.71em">20</text></g><g class="tick" opacity="1" transform="translate(868.75,0)"><line stroke="currentColor" y2="6"/><text fill="currentColor" y="9" dy="0.71em">25</text></g><g class="tick" opacity="1" transform="translate(1042.5,0)"><line stroke="currentColor" y2="6"/><text fill="currentColor" y="9" dy="0.71em">30</text></g><g class="tick" opacity="1" transform="translate(1216.25,0)"><line stroke="currentColor" y2="6"/><text fill="currentColor" y="9" dy="0.71em">35</text></g><g class="tick" opacity="1" transform="translate(1390,0)"><line stroke="currentColor" y2="6"/><text fill="currentColor" y="9" dy="0.71em">40</text></g><text font-family="Arial, sans-serif" font-size="10" x="1390" dy="-5" fill="black" font-weight="bold" text-anchor="end">Weight_Pct [sum]</text></g><g id="yAxis" transform="translate(0,0)" fill="none" font-size="10" font-family="sans-serif" text-anchor="end"><path class="domain" stroke="currentColor" d="M0,0V560"/><g class="tick" opacity="1" transform="translate(0,20.463458110516935)"><line stroke="currentColor" x2="-6"/><text fill="currentColor" x="-9" dy="0.32em">Semiconductores</text></g><g class="tick" opacity="1" transform="translate(0,60.3921568627451)"><line stroke="currentColor" x2="-6"/><text fill="currentColor" x="-9" dy="0.32em">Petróleo y gas</text></g><g class="tick" opacity="1" transform="translate(0,100.32085561497327)"><line stroke="currentColor" x2="-6"/><text fill="currentColor" x="-9" dy="0.32em">ETF / Índice</text></g><g class="tick" opacity="1" transform="translate(0,140.24955436720143)"><line stroke="currentColor" x2="-6"/><text fill="currentColor" x="-9" dy="0.32em">Automotriz / EV</text></g><g class="tick" opacity="1" transform="translate(0,180.1782531194296)"><line stroke="currentColor" x2="-6"/><text fill="currentColor" x="-9" dy="0.32em">E-commerce</text></g><g class="tick" opacity="1" transform="translate(0,220.10695187165777)"><line stroke="currentColor" x2="-6"/><text fill="currentColor" x="-9" dy="0.32em">Internet</text></g><g class="tick" opacity="1" transform="translate(0,260.0356506238859)"><line stroke="currentColor" x2="-6"/><text fill="currentColor" x="-9" dy="0.32em">Bono soberano</text></g><g class="tick" opacity="1" transform="translate(0,299.96434937611406)"><line stroke="currentColor" x2="-6"/><text fill="currentColor" x="-9" dy="0.32em">Hardware</text></g><g class="tick" opacity="1" transform="translate(0,339.89304812834223)"><line stroke="currentColor" x2="-6"/><text fill="currentColor" x="-9" dy="0.32em">Bebidas</text></g><g class="tick" opacity="1" transform="translate(0,379.8217468805704)"><line stroke="currentColor" x2="-6"/><text fill="currentColor" x="-9" dy="0.32em">Energía integrada</text></g><g class="tick" opacity="1" transform="translate(0,419.7504456327986)"><line stroke="currentColor" x2="-6"/><text fill="currentColor" x="-9" dy="0.32em">FCI renta variable</text></g><g class="tick" opacity="1" transform="translate(0,459.67914438502675)"><line stroke="currentColor" x2="-6"/><text fill="currentColor" x="-9" dy="0.32em">Otros</text></g><g class="tick" opacity="1" transform="translate(0,499.60784313725486)"><line stroke="currentColor" x2="-6"/><text fill="currentColor" x="-9" dy="0.32em">Bancos</text></g><g class="tick" opacity="1" transform="translate(0,539.5365418894831)"><line stroke="currentColor" x2="-6"/><text fill="currentColor" x="-9" dy="0.32em">Gas / Utilities</text></g><text font-family="Arial, sans-serif" font-size="10" x="4" fill="black" font-weight="bold" text-anchor="start" dominant-baseline="hanging">Industry_Group</text></g></g><text y="4" x="4" style="font-family: Arial, sans-serif; font-size: 12px; fill: black; font-weight: bold; dominant-baseline: hanging;"/></g></g><script><![CDATA[
+(function () {
+  var svg = document.querySelector('svg');
+  var NS = 'http://www.w3.org/2000/svg';
+  var tip = document.createElementNS(NS, 'g');
+  tip.setAttribute('pointer-events', 'none');
+  tip.style.display = 'none';
+  var box = document.createElementNS(NS, 'rect');
+  box.setAttribute('rx', '6');
+  box.setAttribute('fill', '#111827');
+  var label = document.createElementNS(NS, 'text');
+  label.setAttribute('fill', '#ffffff');
+  label.setAttribute('font-family', 'Arial, sans-serif');
+  label.setAttribute('font-size', '13');
+  label.setAttribute('x', '10');
+  label.setAttribute('y', '7');
+  label.setAttribute('dominant-baseline', 'hanging');
+  tip.appendChild(box);
+  tip.appendChild(label);
+  svg.appendChild(tip);
+
+  function hide() {
+    tip.style.display = 'none';
+  }
+
+  function show(evt, value) {
+    label.textContent = value;
+    tip.style.display = 'block';
+    var b = label.getBBox();
+    var w = b.width + 20;
+    var h = b.height + 14;
+    box.setAttribute('width', w);
+    box.setAttribute('height', h);
+    var p = svg.createSVGPoint();
+    p.x = evt.clientX;
+    p.y = evt.clientY;
+    var loc = p.matrixTransform(svg.getScreenCTM().inverse());
+    var vb = svg.viewBox.baseVal;
+    var x = Math.min(loc.x + 14, vb.width - w - 6);
+    var y = Math.max(loc.y - h - 12, 6);
+    tip.setAttribute('transform', 'translate(' + x + ',' + y + ')');
+  }
+
+  var rects = svg.querySelectorAll('.bars rect');
+  Array.prototype.forEach.call(rects, function (rect) {
+    var t = rect.querySelector('title');
+    if (!t) return;
+    var value = t.textContent;
+    rect.setAttribute('aria-label', value);
+    rect.removeChild(t);
+    rect.addEventListener('mousemove', function (evt) { show(evt, value); });
+    rect.addEventListener('mouseleave', hide);
+  });
+})();
+]]></script></svg>
