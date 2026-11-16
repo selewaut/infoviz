@@ -3,14 +3,32 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Portfolio Tracker — Santiago Elewaut</title>
+  <title>Seguimiento de cartera — Santiago Elewaut</title>
   <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #222222;
+      --fg-strong: #111827;
+      --fg-body: #374151;
+      --muted: #666666;
+      --muted-strong: #555555;
+      --muted-soft: #5f6368;
+      --card: #fafafa;
+      --border: #e4e4e4;
+      --border-strong: #d1d5db;
+      --accent: #1e40af;
+      --accent-hover: #2563eb;
+      --gain: #15803d;
+      --loss: #dc2626;
+      --on-accent: #ffffff;
+    }
     body {
       font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
       max-width: 1200px;
       margin: 2rem auto;
       padding: 0 1.5rem;
-      color: #222;
+      background: var(--bg);
+      color: var(--fg);
     }
     h1 {
       font-size: 1.6rem;
@@ -19,12 +37,18 @@
     .subtitle {
       margin: 0;
       font-size: 0.95rem;
-      color: #666;
+      color: var(--muted);
     }
     h2 {
       font-size: 1.25rem;
       margin-top: 0;
-      color: #111827;
+      color: var(--fg-strong);
+    }
+    .gain {
+      color: var(--gain);
+    }
+    .loss {
+      color: var(--loss);
     }
     object {
       width: 100%;
@@ -36,7 +60,7 @@
     }
     .flourish-pair {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
       gap: 1.5rem 2rem;
       align-items: start;
     }
@@ -50,7 +74,7 @@
       margin: 0 0 0.5rem;
       font-size: 0.95rem;
       font-weight: 600;
-      color: #374151;
+      color: var(--fg-body);
     }
     section + section {
       margin-top: 3rem;
@@ -62,10 +86,10 @@
       margin-top: 1.75rem;
     }
     .kpi {
-      border: 1px solid #e4e4e4;
+      border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1rem 1.15rem;
-      background: #fafafa;
+      background: var(--card);
     }
     .kpi-label {
       margin: 0 0 0.35rem;
@@ -73,27 +97,28 @@
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: #777;
+      color: var(--muted-soft);
     }
     .kpi-value {
       margin: 0;
       font-size: 1.7rem;
       font-weight: 700;
       line-height: 1.1;
+      font-variant-numeric: tabular-nums;
     }
     .kpi-value.positive {
-      color: #1a9e4b;
+      color: var(--gain);
     }
     .kpi-note {
       margin: 0.4rem 0 0;
       font-size: 0.8rem;
-      color: #888;
+      color: var(--muted-soft);
     }
     .chart-note {
       max-width: 80ch;
       font-size: 0.92rem;
       line-height: 1.5;
-      color: #555;
+      color: var(--muted-strong);
     }
     .risk-frame {
       width: 100%;
@@ -111,51 +136,62 @@
       font: inherit;
       font-size: 0.85rem;
       padding: 0.35rem 0.9rem;
-      border: 1px solid #d1d5db;
+      border: 1px solid var(--border-strong);
       border-radius: 999px;
-      background: #fff;
-      color: #374151;
+      background: var(--bg);
+      color: var(--fg-body);
       cursor: pointer;
     }
     .risk-toolbar button:hover {
-      border-color: #2563eb;
-      color: #1e40af;
+      border-color: var(--accent-hover);
+      color: var(--accent);
     }
     .risk-toolbar button[aria-pressed="true"] {
-      background: #1e40af;
-      border-color: #1e40af;
-      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--on-accent);
+    }
+    .risk-toolbar button:focus-visible {
+      outline: 2px solid var(--accent-hover);
+      outline-offset: 2px;
+    }
+    main {
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Portfolio Tracker</h1>
+    <h1>Seguimiento de cartera</h1>
     <p class="subtitle">Santiago Elewaut · ITBA · 2026</p>
   </header>
 
-  <section class="kpis" aria-label="Indicadores del portafolio al 30/10/2026">
-    <div class="kpi">
-      <p class="kpi-label">YTD en pesos</p>
-      <p class="kpi-value positive">+31,68%</p>
-      <p class="kpi-note">2026 · al 30/10</p>
-    </div>
-    <div class="kpi">
-      <p class="kpi-label">YTD en dólares (MEP)</p>
-      <p class="kpi-value positive">+22,77%</p>
-      <p class="kpi-note">2026 · al 30/10</p>
-    </div>
-    <div class="kpi">
-      <p class="kpi-label">YTD ajustado por inflación</p>
-      <p class="kpi-value positive">+4,20%</p>
-      <p class="kpi-note">IPC acumulado 2026: 26,38%</p>
-    </div>
-    <div class="kpi">
-      <p class="kpi-label">Tickers únicos</p>
-      <p class="kpi-value">25</p>
-      <p class="kpi-note">CEDEARs, acciones, bonos y FCI</p>
-    </div>
-  </section>
+  <main>
+    <section aria-labelledby="kpi-heading">
+      <h2 id="kpi-heading">Indicadores del portafolio al 30/10/2026</h2>
+      <div class="kpis">
+        <div class="kpi">
+          <p class="kpi-label">YTD en pesos</p>
+          <p class="kpi-value positive">+31,68%</p>
+          <p class="kpi-note">2026 · al 30/10</p>
+        </div>
+        <div class="kpi">
+          <p class="kpi-label">YTD en dólares (MEP)</p>
+          <p class="kpi-value positive">+22,77%</p>
+          <p class="kpi-note">2026 · al 30/10</p>
+        </div>
+        <div class="kpi">
+          <p class="kpi-label">YTD ajustado por inflación</p>
+          <p class="kpi-value positive">+4,20%</p>
+          <p class="kpi-note">IPC acumulado 2026: 26,38%</p>
+        </div>
+        <div class="kpi">
+          <p class="kpi-label">Tickers únicos</p>
+          <p class="kpi-value">25</p>
+          <p class="kpi-note">CEDEARs, acciones, bonos y FCI</p>
+        </div>
+      </div>
+    </section>
 
   <section>
     <h2>Exposición de cartera por industria</h2>
@@ -165,7 +201,7 @@
       las que pesan menos de 0,5% se agrupan en «Otros».
     </p>
     <object type="image/svg+xml" data="./images/industry_group.svg">
-      <img src="./images/industry_group.svg" alt="Exposición del portafolio por industria">
+      <img src="./images/industry_group.svg" alt="Exposición del portafolio por industria" loading="lazy">
     </object>
   </section>
 
@@ -181,7 +217,7 @@
         <h3>En pesos: portafolio vs inflación</h3>
         <div class="flourish-embed flourish-chart" data-src="visualisation/30757619">
           <noscript>
-            <img src="https://public.flourish.studio/visualisation/30757619/thumbnail" width="100%" alt="chart visualization">
+            <img src="https://public.flourish.studio/visualisation/30757619/thumbnail" width="100%" alt="Visualización del gráfico" loading="lazy">
           </noscript>
         </div>
       </div>
@@ -189,7 +225,7 @@
         <h3>En dólares: portafolio vs S&amp;P 500</h3>
         <div class="flourish-embed flourish-chart" data-src="visualisation/30928132">
           <noscript>
-            <img src="https://public.flourish.studio/visualisation/30928132/thumbnail" width="100%" alt="chart visualization">
+            <img src="https://public.flourish.studio/visualisation/30928132/thumbnail" width="100%" alt="Visualización del gráfico" loading="lazy">
           </noscript>
         </div>
       </div>
@@ -198,7 +234,7 @@
   </section>
 
   <section>
-    <h2>¿<span style="color: #F53538;">Me fundí</span> o ya <span style="color: #32CC5B;">me puedo jubilar</span> hoy?</h2>
+    <h2>¿<span class="loss">Me fundí</span> o ya <span class="gain">me puedo jubilar</span> hoy?</h2>
     <p class="chart-note">
       Variación diaria al 30/10/2026 en ARS y USD. Cada bloque es un activo:
       el tamaño indica su peso en la cartera y el color, la variación del día.
@@ -206,7 +242,7 @@
     <div class='tableauPlaceholder' id='viz1794786202232' style='position: relative'>
       <noscript>
         <a href='#'>
-          <img alt='DASHBOARD ' src='https://public.tableau.com/static/images/Tr/Treemap_groups/DASHBOARD/1_rss.png' style='border: none' />
+          <img alt='Panel del portafolio' src='https://public.tableau.com/static/images/Tr/Treemap_groups/DASHBOARD/1_rss.png' style='border: none' />
         </a>
       </noscript>
       <object class='tableauViz' style='display:none;'>
@@ -222,17 +258,14 @@
         <param name='display_spinner' value='yes' />
         <param name='display_overlay' value='yes' />
         <param name='display_count' value='yes' />
-        <param name='language' value='en-US' />
+        <param name='language' value='es-ES' />
         <param name='filter' value='publish=yes' />
       </object>
     </div>
     <script type='text/javascript'>
       var divElement = document.getElementById('viz1794786202232');
       var vizElement = divElement.getElementsByTagName('object')[0];
-      if (divElement.offsetWidth > 800) {
-        vizElement.style.width = '100%';
-        vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
-      } else if (divElement.offsetWidth > 500) {
+      if (divElement.offsetWidth > 500) {
         vizElement.style.width = '100%';
         vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
       } else {
@@ -264,6 +297,7 @@
       class="risk-frame"
       id="riskFrame"
       src="https://datawrapper.dwcdn.net/v6pot/"
+      loading="lazy"
       scrolling="no"
       data-external="1"
       title="Riesgo versus retorno — 12 meses"></iframe>
@@ -296,6 +330,7 @@
       });
     </script>
   </section>
+  </main>
 
 </body>
 </html>
