@@ -34,6 +34,24 @@
     .flourish-embed {
       width: 100%;
     }
+    .flourish-pair {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 1.5rem 2rem;
+      align-items: start;
+    }
+    .flourish-pair .flourish-embed {
+      min-width: 0;
+    }
+    .flourish-pair > div {
+      min-width: 0;
+    }
+    .flourish-pair h3 {
+      margin: 0 0 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #374151;
+    }
     section + section {
       margin-top: 3rem;
     }
@@ -77,6 +95,37 @@
       line-height: 1.5;
       color: #555;
     }
+    .risk-frame {
+      width: 100%;
+      height: 400px;
+      border: 0;
+      display: block;
+    }
+    .risk-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0 0 0.75rem;
+    }
+    .risk-toolbar button {
+      font: inherit;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      background: #fff;
+      color: #374151;
+      cursor: pointer;
+    }
+    .risk-toolbar button:hover {
+      border-color: #2563eb;
+      color: #1e40af;
+    }
+    .risk-toolbar button[aria-pressed="true"] {
+      background: #1e40af;
+      border-color: #1e40af;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -99,7 +148,7 @@
     <div class="kpi">
       <p class="kpi-label">YTD ajustado por inflación</p>
       <p class="kpi-value positive">+4,20%</p>
-      <p class="kpi-note">IPC octubre 2026: 2,2%</p>
+      <p class="kpi-note">IPC acumulado 2026: 26,38%</p>
     </div>
     <div class="kpi">
       <p class="kpi-label">Tickers únicos</p>
@@ -109,12 +158,11 @@
   </section>
 
   <section>
-    <h2>Exposicion de cartera por industria</h2>
+    <h2>Exposición de cartera por industria</h2>
     <p class="chart-note">
-      Peso de cada industria sobre el valor total de la cartera al 30/10/2026.
-      La industria es un sub-rubro asignado manualmente segun la actividad principal
-      de cada emisor, mas fino que el sector. Las industrias con menos del 0,5% del
-      portafolio se agrupan en «Otros».
+      Peso de cada industria sobre el total de la cartera al 30/10/2026.
+      La industria es un sub-rubro manual, más específico que el sector;
+      las que pesan menos de 0,5% se agrupan en «Otros».
     </p>
     <object type="image/svg+xml" data="./images/industry_group.svg">
       <img src="./images/industry_group.svg" alt="Exposición del portafolio por industria">
@@ -122,8 +170,39 @@
   </section>
 
   <section>
+    <h2>Mis pesos: ¿corren o se quedan dormidos?</h2>
+    <p class="chart-note">
+      Rendimiento acumulado 2026, con base 0% al cierre de 2025.
+      A la izquierda, el portafolio en pesos contra la inflación; a la derecha,
+      en dólares (MEP) contra el S&P 500.
+    </p>
+    <div class="flourish-pair">
+      <div>
+        <h3>En pesos: portafolio vs inflación</h3>
+        <div class="flourish-embed flourish-chart" data-src="visualisation/30757619">
+          <noscript>
+            <img src="https://public.flourish.studio/visualisation/30757619/thumbnail" width="100%" alt="chart visualization">
+          </noscript>
+        </div>
+      </div>
+      <div>
+        <h3>En dólares: portafolio vs S&amp;P 500</h3>
+        <div class="flourish-embed flourish-chart" data-src="visualisation/30928132">
+          <noscript>
+            <img src="https://public.flourish.studio/visualisation/30928132/thumbnail" width="100%" alt="chart visualization">
+          </noscript>
+        </div>
+      </div>
+    </div>
+    <script src="https://public.flourish.studio/resources/embed.js"></script>
+  </section>
+
+  <section>
     <h2>¿<span style="color: #F53538;">Me fundí</span> o ya <span style="color: #32CC5B;">me puedo jubilar</span> hoy?</h2>
-    <p>Último Rendimiento diario al 30/10/2026 en ARS y USD</p>
+    <p class="chart-note">
+      Variación diaria al 30/10/2026 en ARS y USD. Cada bloque es un activo:
+      el tamaño indica su peso en la cartera y el color, la variación del día.
+    </p>
     <div class='tableauPlaceholder' id='viz1794786202232' style='position: relative'>
       <noscript>
         <a href='#'>
@@ -167,14 +246,55 @@
   </section>
 
   <section>
-    <h2>Mis pesos: ¿corren o se quedan dormidos?</h2>
-    <p>¿Cómo viene la cuenta en lo que va del año?</p>
-    <div class="flourish-embed flourish-chart" data-src="visualisation/30757619">
-      <script src="https://public.flourish.studio/resources/embed.js"></script>
-      <noscript>
-        <img src="https://public.flourish.studio/visualisation/30757619/thumbnail" width="100%" alt="chart visualization">
-      </noscript>
+    <h2>Riesgo vs retorno (USD)</h2>
+    <p class="chart-note">
+      Cada punto es un activo en dólares: volatilidad anualizada en el eje X
+      (desvío estándar diario × √252) y retorno total del período en el eje Y.
+      El tamaño representa el peso en la cartera al 30/10/2026; el color, el
+      sector, con los de menor peso agrupados en «Otros». El tooltip muestra
+      peso y métricas; los botones cambian la ventana temporal.
+    </p>
+    <div class="risk-toolbar" role="group" aria-label="Ventana temporal">
+      <button type="button" data-window="full" aria-pressed="true">12 meses</button>
+      <button type="button" data-window="ytd" aria-pressed="false">YTD 2026</button>
+      <button type="button" data-window="6m" aria-pressed="false">6 meses</button>
+      <button type="button" data-window="30d" aria-pressed="false">30 días</button>
     </div>
+    <iframe
+      class="risk-frame"
+      id="riskFrame"
+      src="https://datawrapper.dwcdn.net/v6pot/"
+      scrolling="no"
+      data-external="1"
+      title="Riesgo versus retorno — 12 meses"></iframe>
+    <script>
+      const riskCharts = {
+        full: { id: "v6pot", label: "12 meses" },
+        ytd: { id: "zsuoH", label: "YTD 2026" },
+        "6m": { id: "P7Gy0", label: "6 meses" },
+        "30d": { id: "cqy0r", label: "30 días" }
+      };
+      const riskFrame = document.getElementById("riskFrame");
+      const riskButtons = document.querySelectorAll(".risk-toolbar button");
+      riskButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const chart = riskCharts[button.dataset.window];
+          if (!chart) return;
+          riskButtons.forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
+          riskFrame.src = "https://datawrapper.dwcdn.net/" + chart.id + "/";
+          riskFrame.title = "Riesgo versus retorno — " + chart.label;
+        });
+      });
+      window.addEventListener("message", (event) => {
+        const heights = event.data && event.data["datawrapper-height"];
+        if (!heights) return;
+        document.querySelectorAll("iframe").forEach((frame) => {
+          if (frame.contentWindow !== event.source) return;
+          const id = Object.keys(heights)[0];
+          if (id) frame.style.height = heights[id] + "px";
+        });
+      });
+    </script>
   </section>
 
 </body>
