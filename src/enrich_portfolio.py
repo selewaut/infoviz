@@ -6,6 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 PORTFOLIO_PATH = BASE_DIR / "data/financial_data/inputs/iol_portfolio_argentina.csv"
 METADATA_PATH = BASE_DIR / "data/financial_data/inputs/iol_asset_metadata.csv"
 OUTPUT_DIR = BASE_DIR / "data/financial_data/outputs"
+AUM_INDEXED_PATH = OUTPUT_DIR / "aum_indexed.csv"
 
 SNAPSHOT_DATE = "2026-10-30"
 INDUSTRY_GROUP_THRESHOLD = 0.5
@@ -204,6 +205,18 @@ def signed_pct_label(value: float) -> str:
     return f"{value:+.2f}%".replace(".", ",")
 
 
+def load_ccl(snapshot_date: str) -> tuple[float, float]:
+    fx = pd.read_csv(AUM_INDEXED_PATH, parse_dates=["Date"]).sort_values("Date")
+    fx["Exchange_CCL_Prev"] = fx["Exchange_CCL"].shift(1)
+    row = fx.loc[fx["Date"] == pd.Timestamp(snapshot_date)]
+    if row.empty:
+        raise ValueError(f"No FX data for {snapshot_date}")
+    row = row.iloc[0]
+    if pd.isna(row["Exchange_CCL_Prev"]):
+        raise ValueError(f"No previous FX data before {snapshot_date}")
+    return float(row["Exchange_CCL"]), float(row["Exchange_CCL_Prev"])
+
+
 def summarize_sector(df: pd.DataFrame, total: float) -> pd.DataFrame:
     rows = []
     for sector, group in df.groupby("Sector", sort=False):
@@ -222,6 +235,11 @@ def summarize_sector(df: pd.DataFrame, total: float) -> pd.DataFrame:
                     / group["Value_ARS"].sum()
                 ),
                 "Daily_PnL_ARS": group["Daily_PnL_ARS"].sum(),
+                "Weighted_Daily_Change_USD_Pct": (
+                    (group["Value_ARS"] * group["Daily_Change_USD_Pct"]).sum()
+                    / group["Value_ARS"].sum()
+                ),
+                "Daily_PnL_USD": group["Daily_PnL_USD"].sum(),
             }
         )
     out = pd.DataFrame(rows).sort_values("Value_ARS", ascending=False).reset_index(drop=True)
@@ -250,6 +268,11 @@ def summarize_industry(df: pd.DataFrame, total: float) -> pd.DataFrame:
                     / group["Value_ARS"].sum()
                 ),
                 "Daily_PnL_ARS": group["Daily_PnL_ARS"].sum(),
+                "Weighted_Daily_Change_USD_Pct": (
+                    (group["Value_ARS"] * group["Daily_Change_USD_Pct"]).sum()
+                    / group["Value_ARS"].sum()
+                ),
+                "Daily_PnL_USD": group["Daily_PnL_USD"].sum(),
             }
         )
     out = pd.DataFrame(rows).sort_values("Value_ARS", ascending=False).reset_index(drop=True)
@@ -278,6 +301,11 @@ def summarize_industry_group(df: pd.DataFrame, total: float) -> pd.DataFrame:
                     / group["Value_ARS"].sum()
                 ),
                 "Daily_PnL_ARS": group["Daily_PnL_ARS"].sum(),
+                "Weighted_Daily_Change_USD_Pct": (
+                    (group["Value_ARS"] * group["Daily_Change_USD_Pct"]).sum()
+                    / group["Value_ARS"].sum()
+                ),
+                "Daily_PnL_USD": group["Daily_PnL_USD"].sum(),
             }
         )
     out = pd.DataFrame(rows).sort_values("Value_ARS", ascending=False).reset_index(drop=True)
@@ -343,6 +371,19 @@ def main() -> None:
     df["Daily_PnL_ARS"] = df["Value_ARS"] - previous_value
     df["Contribution_Pct"] = df["Daily_PnL_ARS"] / total * 100
 
+    ccl_now, ccl_prev = load_ccl(SNAPSHOT_DATE)
+    fx_change = ccl_now / ccl_prev - 1
+    df["FX_CCL_Change_Pct"] = fx_change * 100
+    df["Value_USD"] = df["Value_ARS"] / ccl_now
+    df["Value_USD_Label"] = (df["Value_USD"] / 1000).map(
+        lambda value: f"USD {value:.1f} K".replace(".", ",")
+    )
+    df["Daily_Change_USD_Pct"] = (
+        (1 + df["Daily_Change_Pct"] / 100) / (1 + fx_change) - 1
+    ) * 100
+    df["Daily_Change_USD_Label"] = df["Daily_Change_USD_Pct"].map(signed_pct_label)
+    df["Daily_PnL_USD"] = df["Value_USD"] - previous_value / ccl_prev
+
     df["Underlying_Symbol"] = df["MCP_Related_Symbols"].str.split("|").str[0]
     df["Is_ETF"] = df["Symbol"].eq("SPY")
     df["TIR_Pct"] = df["MCP_TIR"] * 100
@@ -378,12 +419,18 @@ def main() -> None:
         "Value_ARS",
         "Value_MM_ARS",
         "Value_MM_Label",
+        "Value_USD",
+        "Value_USD_Label",
         "Weight_Pct",
         "Weight_Label",
         "Daily_Change_Pct",
         "Daily_Change_Label",
+        "Daily_Change_USD_Pct",
+        "Daily_Change_USD_Label",
         "Daily_PnL_ARS",
+        "Daily_PnL_USD",
         "Contribution_Pct",
+        "FX_CCL_Change_Pct",
         "TIR_Pct",
         "Duration_Years",
         "Parity_Pct",
@@ -411,6 +458,7 @@ def main() -> None:
     print(f"Rows: {len(df)}")
     print(f"Total AUM: ARS {total:,.2f}")
     print(f"Weight sum: {df['Weight_Pct'].sum():.6f}%")
+    print(f"FX CCL: {ccl_now:,.2f} ({fx_change * 100:+.2f}% d/d)")
     print(f"Max value difference vs source: {value_diff:.6f}")
     print(f"Type mismatches: {type_mismatches}")
     print(f"Industry groups: {len(industry_group_summary)}")
@@ -418,7 +466,16 @@ def main() -> None:
     print("\nTop 5 holdings:")
     print(
         df.sort_values("Value_ARS", ascending=False)
-        .head(5)[["Symbol", "Sector", "Industry", "Weight_Pct", "Daily_Change_Pct"]]
+        .head(5)[
+            [
+                "Symbol",
+                "Sector",
+                "Industry",
+                "Weight_Pct",
+                "Daily_Change_Pct",
+                "Daily_Change_USD_Pct",
+            ]
+        ]
         .to_string(index=False)
     )
 
