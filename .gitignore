@@ -27,3 +27,7 @@ dist/
 *.csv
 
 data/
+
+# Local / generated
+docs/chart-plan.md
+images/risk_return.html

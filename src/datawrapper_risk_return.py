@@ -4,15 +4,14 @@ Usage:
     python src/datawrapper_risk_return.py              # all four windows
     python src/datawrapper_risk_return.py --window ytd # a single window
 
-Requires DATAWRAPPER_API_TOKEN in the environment or in .env. Chart IDs are
-cached in images/datawrapper_charts.json and reused on subsequent runs.
+Requires DATAWRAPPER_API_TOKEN in the environment or in .env. Each run creates
+new charts; the published versions are managed directly in Datawrapper.
 """
 
 from __future__ import annotations
 
 import argparse
 import io
-import json
 import os
 from pathlib import Path
 
@@ -21,7 +20,6 @@ import requests
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 RISK_RETURN = BASE_DIR / "data/financial_data/outputs/risk_return.csv"
-STATE = BASE_DIR / "images/datawrapper_charts.json"
 API = "https://api.datawrapper.de/v3"
 
 # Same blue as the "Resto" bars in images/industry_group.svg.
@@ -65,17 +63,6 @@ def load_token() -> str:
         "DATAWRAPPER_API_TOKEN not found. Add it to .env, e.g.\n"
         "DATAWRAPPER_API_TOKEN=dw_xxxxxxxxxxxx"
     )
-
-
-def load_state() -> dict:
-    if STATE.exists():
-        return json.loads(STATE.read_text(encoding="utf-8"))
-    return {}
-
-
-def save_state(state: dict) -> None:
-    STATE.parent.mkdir(parents=True, exist_ok=True)
-    STATE.write_text(json.dumps(state, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
 def build_frame(window: str) -> pd.DataFrame:
@@ -185,37 +172,23 @@ def metadata_for(window: str, as_of: str) -> dict:
     }
 
 
-def upsert(token: str, window: str, frame: pd.DataFrame, as_of: str, state: dict) -> dict:
+def publish(token: str, window: str, frame: pd.DataFrame, as_of: str) -> dict:
     title = f"Riesgo vs. retorno de la cartera — {WINDOW_LABELS[window]}"
-    entry = state.get(window) or {}
-    chart_id = entry.get("id")
-
-    if chart_id:
-        check(
-            requests.patch(
-                f"{API}/charts/{chart_id}",
-                headers=api_headers(token),
-                json={"title": title, "language": "es-AR"},
-                timeout=30,
-            ),
-            f"Update chart {chart_id}",
-        )
-    else:
-        created = check(
-            requests.post(
-                f"{API}/charts",
-                headers=api_headers(token),
-                json={
-                    "title": title,
-                    "type": "d3-scatter-plot",
-                    "language": "es-AR",
-                    "lastEditStep": 3,
-                },
-                timeout=30,
-            ),
-            "Create chart",
-        )
-        chart_id = created["id"]
+    created = check(
+        requests.post(
+            f"{API}/charts",
+            headers=api_headers(token),
+            json={
+                "title": title,
+                "type": "d3-scatter-plot",
+                "language": "es-AR",
+                "lastEditStep": 3,
+            },
+            timeout=30,
+        ),
+        "Create chart",
+    )
+    chart_id = created["id"]
 
     check(
         requests.put(
@@ -266,17 +239,13 @@ def main() -> None:
     args = parser.parse_args()
 
     token = load_token()
-    state = load_state()
     as_of = pd.read_csv(RISK_RETURN)["as_of"].iloc[0]
     windows = args.window or list(WINDOW_LABELS)
 
     for window in windows:
         frame = build_frame(window)
-        state[window] = upsert(token, window, frame, as_of, state)
-        save_state(state)
-        print(f"{window:4s}  id={state[window]['id']}  {state[window]['embed']}  ({len(frame)} activos)")
-
-    print(f"\nstate -> {STATE.relative_to(BASE_DIR)}")
+        chart = publish(token, window, frame, as_of)
+        print(f"{window:4s}  id={chart['id']}  {chart['embed']}  ({len(frame)} activos)")
 
 
 if __name__ == "__main__":
