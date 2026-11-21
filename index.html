@@ -18,7 +18,11 @@
   </header>
 
   <main>
-    <p class="lead">Rendimiento, composición y riesgo de mi cartera. Datos al 30/10/2026.</p>
+    <p class="lead">Rendimiento, composición y riesgo de cartera de inversiones en comitente <InvertirOnline class="com"></InvertirOnline>. Datos al 30/10/2026.</p>
+    <p class="lead">
+      La historia va del resultado a la composición y de ahí al riesgo: primero cuánto gané,
+      después dónde está concentrada la cartera y al final qué activos compensan el riesgo que asumo.
+    </p>
 
     <section aria-labelledby="kpi-heading">
       <h2 id="kpi-heading">Resumen al 30/10/2026</h2>
@@ -58,7 +62,7 @@
     </section>
 
     <section>
-      <h2>Exposición por industria</h2>
+      <h2>¿Dónde está concentrada mi cartera?</h2>
       <p class="chart-note">
         Peso de cada industria sobre el total de la cartera al 30/10/2026.
         Las que pesan menos de 0,5% se agrupan en «Otros».
@@ -66,17 +70,19 @@
       <object type="image/svg+xml" data="./images/industry_group.svg">
         <img src="./images/industry_group.svg" alt="Exposición del portafolio por industria" loading="lazy">
       </object>
+      <p class="chart-takeaway">La cartera está muy concentrada: semiconductores (37,2%) y petróleo y gas (22,1%) suman casi el 60% del total, y tres activos —AMD, SPY y VIST— explican más de la mitad.</p>
+      <p class="tool-tag">Herramienta: RAWGraphs</p>
     </section>
 
     <section>
-      <h2>Rendimiento acumulado 2026</h2>
+      <h2>¿Le gané a la inflación y al mercado?</h2>
       <p class="chart-note">
         Base 0% al cierre de 2025. Izquierda: cartera en pesos frente a la inflación.
         Derecha: cartera en dólares (MEP) frente al S&P 500.
       </p>
       <div class="flourish-pair">
         <div>
-          <h3>En pesos: cartera vs. inflación</h3>
+          <h3>¿Le gané a la inflación en pesos?</h3>
           <div class="flourish-embed flourish-chart" data-src="visualisation/30757619">
             <noscript>
               <img src="https://public.flourish.studio/visualisation/30757619/thumbnail" width="100%" alt="Rendimiento de la cartera en pesos frente a la inflación" loading="lazy">
@@ -84,7 +90,7 @@
           </div>
         </div>
         <div>
-          <h3>En dólares: cartera vs. S&amp;P 500</h3>
+          <h3>¿Le gané al S&amp;P 500 en dólares?</h3>
           <div class="flourish-embed flourish-chart" data-src="visualisation/30928132">
             <noscript>
               <img src="https://public.flourish.studio/visualisation/30928132/thumbnail" width="100%" alt="Rendimiento de la cartera en dólares frente al S&P 500" loading="lazy">
@@ -93,10 +99,12 @@
         </div>
       </div>
       <script src="https://public.flourish.studio/resources/embed.js"></script>
+      <p class="chart-takeaway">Sí, pero con poco margen: en pesos la cartera ganó 31,7% frente a una inflación de 26,4%, un retorno real de 4,2%. En dólares rindió 22,8%, más que el 10,7% del S&amp;P 500.</p>
+      <p class="tool-tag">Herramienta: Flourish</p>
     </section>
 
     <section>
-      <h2>Composición y variación diaria</h2>
+      <h2>¿<span class="loss">Me fundí</span> o ya <span class="gain">me puedo jubilar</span> hoy?</h2>
       <p class="chart-note">
         Cada bloque es un activo: el tamaño indica su peso en la cartera y el color,
         la variación del día en ARS y USD. Datos al 30/10/2026.
@@ -138,10 +146,12 @@
         scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
         vizElement.parentNode.insertBefore(scriptElement, vizElement);
       </script>
+      <p class="chart-takeaway">Ese día tocó «me fundí»: la cartera cayó 5,6% en pesos (6,5% en dólares). AMD (-10,3%) e INTC (-29,0%) explicaron casi todo el rojo; solo KO, CVX y PBR cerraron en verde.</p>
+      <p class="tool-tag">Herramienta: Tableau Public</p>
     </section>
 
     <section>
-      <h2>Riesgo vs. retorno (USD)</h2>
+      <h2>¿Qué activos compensan mejor el riesgo que asumen?</h2>
       <p class="chart-note">
         Cada punto es un activo en dólares. Eje X: volatilidad anualizada.
         Eje Y: retorno del período. Tamaño: peso en cartera. Color: sector.
@@ -188,6 +198,17 @@
           });
         });
       </script>
+      <p class="chart-takeaway">En 12 meses, KO es el que mejor combina retorno y riesgo (40,6% con 19,3% de volatilidad) y AMD el que más aporta (116,9%, con 72,2% de volatilidad). En el otro extremo, GD30, AL30 y TGNO4 acumulan pérdidas.</p>
+      <p class="tool-tag">Herramienta: Datawrapper</p>
+    </section>
+
+    <section aria-labelledby="conclusiones-heading">
+      <h2 id="conclusiones-heading">Conclusiones</h2>
+      <ul class="conclusions">
+        <li>En pesos la cartera rinde, pero buena parte de esa ganancia la explica el tipo de cambio: en dólares el retorno es menor y el rendimiento real queda apenas por encima de la inflación.</li>
+        <li>La exposición está muy concentrada: tecnología y energía reúnen casi dos tercios de la cartera, y tres activos superan la mitad del total.</li>
+        <li>La mayor parte de las posiciones está en dólares, así que el riesgo no depende solo de qué activos elijo sino de cuánto peso les doy.</li>
+      </ul>
     </section>
   </main>
 

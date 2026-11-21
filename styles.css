@@ -9,7 +9,7 @@
 :root {
   --bg: #ffffff;
   --fg: #222222;
-  --fg-strong: #111827;
+  --fg-strong: #414554;
   --fg-body: #374151;
   --muted: #666666;
   --muted-strong: #555555;
@@ -19,8 +19,8 @@
   --border-strong: #d1d5db;
   --accent: #1e40af;
   --accent-hover: #2563eb;
-  --gain: #15803d;
-  --loss: #dc2626;
+  --gain: #32cc5b;
+  --loss: #f53538;
   --on-accent: #ffffff;
 }
 
@@ -179,11 +179,41 @@ section + section {
   color: var(--muted-soft);
 }
 
+.chart-takeaway {
+  max-width: 80ch;
+  margin: 1rem 0 0;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--card);
+  font-size: 0.92rem;
+  color: var(--fg-body);
+}
+
+.tool-tag {
+  margin: 0.75rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-soft);
+}
+
 .chart-note {
   max-width: 80ch;
   margin: 0 0 1.25rem;
   font-size: 0.92rem;
   color: var(--muted-strong);
+}
+
+.conclusions {
+  max-width: 80ch;
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--fg-body);
+}
+
+.conclusions li {
+  margin: 0.5rem 0;
 }
 
 .calc-details {
