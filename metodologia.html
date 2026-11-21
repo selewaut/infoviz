@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Metodología — Seguimiento de cartera</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="page-header">
+    <div>
+      <p class="back-link"><a href="./index.html">← Volver al tablero</a></p>
+      <h1>Metodología y cálculo</h1>
+      <p class="subtitle">Cómo se construyen las métricas y los gráficos · datos al 30/10/2026</p>
+    </div>
+  </header>
+
+  <main class="prose">
+    <p class="lead">
+      Todas las cifras corresponden a una foto de la cartera al 30/10/2026.
+      Los rendimientos son acumulados de 2026 y no incluyen movimientos posteriores.
+    </p>
+
+    <section>
+      <h2>Datos de base</h2>
+      <ul class="fact-list">
+        <li><strong>Posiciones:</strong> 25 activos</li>
+        <li><strong>Valor total:</strong> ARS 131.630.986,95</li>
+        <li><strong>Valor en dólares:</strong> USD 79.259,97</li>
+        <li><strong>CCL al cierre:</strong> 1.660,75</li>
+        <li><strong>Moneda de exposición:</strong> 88,97% USD · 11,03% ARS</li>
+        <li><strong>Período:</strong> 01/01/2026 – 30/10/2026</li>
+      </ul>
+      <p>
+        El portafolio incluye CEDEARs, acciones locales, bonos soberanos y fondos
+        comunes de inversión. La clasificación por sector, industria y moneda de
+        exposición es manual; no proviene de un estándar externo.
+      </p>
+    </section>
+
+    <section>
+      <h2>Rendimiento en pesos</h2>
+      <p>
+        Se usa el retorno ponderado por tiempo (TWR) diario que publica IOL,
+        acumulado desde el cierre de 2025. El TWR neutraliza aportes y retiros,
+        por lo que mide el desempeño de los activos y no el efecto de agregar o
+        sacar dinero.
+      </p>
+      <div class="formula">
+        r<sub>ARS</sub> = (1 + TWR<sub>diario</sub>) acumulado − 1
+      </div>
+      <p>Al 30/10/2026: <strong class="gain">+31,68%</strong>.</p>
+    </section>
+
+    <section>
+      <h2>Rendimiento en dólares (MEP)</h2>
+      <p>
+        Se descuenta la variación del dólar MEP en el mismo período. El resultado
+        aproxima cuánto cambió la cartera medida en dólares.
+      </p>
+      <div class="formula">
+        r<sub>USD</sub> = (1 + r<sub>ARS</sub>) / (1 + r<sub>MEP</sub>) − 1
+      </div>
+      <p>Al 30/10/2026: <strong class="gain">+22,77%</strong>.</p>
+      <p>
+        Es una conversión derivada del retorno en pesos y del tipo de cambio; no
+        refleja el precio de cierre real de cada activo en su mercado de origen.
+      </p>
+    </section>
+
+    <section>
+      <h2>Ajuste por inflación</h2>
+      <p>
+        El retorno real compara la evolución en pesos con el IPC acumulado de
+        INDEC. Se usa el último dato publicado: enero a octubre de 2026.
+      </p>
+      <div class="formula">
+        r<sub>real</sub> = (1 + r<sub>ARS</sub>) / (1 + IPC) − 1
+      </div>
+      <p>
+        IPC acumulado 2026: <strong>26,38%</strong>.
+        Retorno real al 30/10/2026: <strong class="gain">+4,20%</strong>.
+      </p>
+      <p>
+        El IPC es mensual, mientras que el retorno de la cartera es diario. La
+        comparación usa el mismo mes de cierre, no una serie diaria de inflación.
+      </p>
+    </section>
+
+    <section>
+      <h2>Comparación con el S&amp;P 500</h2>
+      <p>
+        Se toman los cierres mensuales del índice (^GSPC) y se fija la base en
+        diciembre de 2025, igual que la serie de la cartera. Al 30/10/2026:
+        <strong class="gain">+10,73%</strong>.
+      </p>
+      <p>
+        Es un retorno de precio, sin dividendos. El S&amp;P 500 no forma parte de
+        la cartera: se usa solo como referencia.
+      </p>
+    </section>
+
+    <section>
+      <h2>Exposición por industria</h2>
+      <p>
+        Cada activo se asigna a una industria y a un sector. La industria es un
+        sub-rubro más específico que el sector; por ejemplo, «Semiconductores»
+        dentro de «Tecnología». El peso se calcula sobre el valor total:
+      </p>
+      <div class="formula">
+        peso<sub>i</sub> = valor<sub>i</sub> / valor total × 100
+      </div>
+      <p>
+        Las industrias con menos de 0,5% se agrupan en «Otros» para mantener el
+        gráfico legible. En total quedan 13 industrias nombradas más «Otros».
+      </p>
+    </section>
+
+    <section>
+      <h2>Composición y variación diaria</h2>
+      <p>
+        En el treemap, el tamaño de cada bloque es el peso del activo en la
+        cartera. El color representa la variación del día: en ARS, el cambio
+        publicado por IOL; en USD, el mismo cambio ajustado por la variación del
+        CCL.
+      </p>
+      <div class="formula">
+        r<sub>USD</sub> = (1 + r<sub>ARS</sub>) / (1 + ΔCCL) − 1
+      </div>
+      <p>
+        El 30/10/2026 el CCL subió 0,78%, por lo que las variaciones en dólares
+        quedan aproximadamente 0,78 puntos por debajo de las variaciones en pesos.
+        El tooltip muestra además peso, contribución y datos de bonos cuando
+        corresponden.
+      </p>
+    </section>
+
+    <section>
+      <h2>Riesgo vs. retorno</h2>
+      <p>
+        Se usan precios diarios en dólares. Para cada activo y cada ventana se
+        calcula la volatilidad anualizada y el retorno total del período.
+      </p>
+      <div class="formula">
+        volatilidad<sub>anual</sub> = desvío estándar(retornos diarios) × √252<br>
+        retorno = precio final / precio inicial − 1
+      </div>
+      <ul>
+        <li>Ventanas: 12 meses, YTD 2026, 6 meses y 30 días.</li>
+        <li>El tamaño del punto es el peso actual en la cartera.</li>
+        <li>El color indica el sector; los sectores de menor peso se agrupan en «Otros».</li>
+        <li>Se excluyen activos sin peso asignado.</li>
+      </ul>
+      <p>
+        La volatilidad mide dispersión, no dirección: un activo volátil puede
+        terminar el período con ganancia o con pérdida.
+      </p>
+    </section>
+
+    <section>
+      <h2>Fuentes</h2>
+      <ul>
+        <li><strong>IOL REST API:</strong> posiciones, valores, TWR diario, MEP, CCL y datos de bonos.</li>
+        <li><strong>INDEC:</strong> IPC mensual.</li>
+        <li><strong>Yahoo Finance:</strong> serie histórica del S&amp;P 500.</li>
+        <li><strong>Elaboración propia:</strong> clasificación por industria, agregados y cálculos derivados.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Limitaciones</h2>
+      <ul>
+        <li>Es una foto del 30/10/2026; no se actualiza en tiempo real.</li>
+        <li>Las variaciones en dólares son una aproximación derivada del CCL.</li>
+        <li>El IPC es mensual y puede no coincidir exactamente con el cierre de la cartera.</li>
+        <li>El S&amp;P 500 se compara por precio, sin dividendos.</li>
+        <li>La taxonomía de industrias y sectores es manual y puede tener criterios discutibles.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Reproducibilidad</h2>
+      <p>
+        Los scripts de cálculo están en <code>src/</code> y los archivos generados
+        en <code>data/financial_data/outputs/</code>. Los gráficos se publican en
+        Flourish, Tableau Public y Datawrapper, y se embeben en el tablero.
+      </p>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>Datos al 30/10/2026 · Fuente: IOL, INDEC y Yahoo Finance · Elaboración propia.</p>
+    <p><a href="./index.html">← Volver al tablero</a></p>
+  </footer>
+
+</body>
+</html>
