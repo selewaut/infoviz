@@ -18,10 +18,10 @@
   </header>
 
   <main>
-    <p class="lead">Rendimiento, composición y riesgo de cartera de inversiones en comitente <a class="com" href="https://www.invertironline.com" target="_blank" rel="noopener">InvertirOnline.com</a>. Datos al 30/10/2026.</p>
     <p class="lead">
-      La historia va del resultado a la composición y de ahí al riesgo: primero cuánto gané,
-      después dónde está concentrada la cartera y al final qué activos compensan el riesgo que asumo.
+      Cartera en comitente <a class="com" href="https://www.invertironline.com" target="_blank" rel="noopener">InvertirOnline.com</a> al 30/10/2026:
+      composición por industria, rendimiento frente a inflación e índices, última foto con
+      variación y peso, y relación entre peso, rendimiento y volatilidad.
     </p>
 
     <section aria-labelledby="kpi-heading">
@@ -71,7 +71,7 @@
         <img src="./images/industry_group.svg" alt="Exposición del portafolio por industria" loading="lazy">
       </object>
       <p class="chart-takeaway">La cartera está muy concentrada: semiconductores (37,2%) y petróleo y gas (22,1%) suman casi el 60% del total, y tres activos —AMD, SPY y VIST— explican más de la mitad.</p>
-      <p class="tool-tag">Herramienta: RAWGraphs</p>
+      <p class="tool-tag">Herramienta: <a href="./images/industry_group.svg" target="_blank" rel="noopener">RAWGraphs</a></p>
     </section>
 
     <section>
@@ -100,7 +100,7 @@
       </div>
       <script src="https://public.flourish.studio/resources/embed.js"></script>
       <p class="chart-takeaway">Sí, pero con poco margen: en pesos la cartera ganó 31,7% frente a una inflación de 26,4%, un retorno real de 4,2%. En dólares rindió 22,8%, más que el 10,7% del S&amp;P 500.</p>
-      <p class="tool-tag">Herramienta: Flourish</p>
+      <p class="tool-tag">Herramienta: <a href="https://public.flourish.studio/visualisation/30757619/" target="_blank" rel="noopener">Flourish (inflación)</a> · <a href="https://public.flourish.studio/visualisation/30928132/" target="_blank" rel="noopener">Flourish (S&amp;P 500)</a></p>
     </section>
 
     <section>
@@ -147,14 +147,14 @@
         vizElement.parentNode.insertBefore(scriptElement, vizElement);
       </script>
       <p class="chart-takeaway">Ese día tocó «me fundí»: la cartera cayó 5,6% en pesos (6,5% en dólares). AMD (-10,3%) e INTC (-29,0%) explicaron casi todo el rojo; solo KO, CVX y PBR cerraron en verde.</p>
-      <p class="tool-tag">Herramienta: Tableau Public</p>
+      <p class="tool-tag">Herramienta: <a href="https://public.tableau.com/views/Treemap_groups/DASHBOARD" target="_blank" rel="noopener">Tableau Public</a></p>
     </section>
 
     <section>
       <h2>¿Qué activos compensan mejor el riesgo que asumen?</h2>
       <p class="chart-note">
-        Cada punto es un activo en dólares. Eje X: volatilidad anualizada.
-        Eje Y: retorno del período. Tamaño: peso en cartera. Color: sector.
+        Compara el retorno de cada activo con la volatilidad que asume y evalúa si ese
+        desempeño es relevante según su peso en la cartera.
       </p>
       <div class="risk-toolbar" role="group" aria-label="Ventana temporal">
         <button type="button" data-window="full" aria-pressed="true">12 meses</button>
@@ -178,6 +178,7 @@
           "30d": { id: "cqy0r", label: "30 días" }
         };
         const riskFrame = document.getElementById("riskFrame");
+        const dwToolLink = document.getElementById("dwToolLink");
         const riskButtons = document.querySelectorAll(".risk-toolbar button");
         riskButtons.forEach((button) => {
           button.addEventListener("click", () => {
@@ -186,6 +187,7 @@
             riskButtons.forEach((b) => b.setAttribute("aria-pressed", String(b === button)));
             riskFrame.src = "https://datawrapper.dwcdn.net/" + chart.id + "/";
             riskFrame.title = "Riesgo versus retorno — " + chart.label;
+            dwToolLink.href = "https://datawrapper.dwcdn.net/" + chart.id + "/";
           });
         });
         window.addEventListener("message", (event) => {
@@ -199,7 +201,7 @@
         });
       </script>
       <p class="chart-takeaway">En 12 meses, KO es el que mejor combina retorno y riesgo (40,6% con 19,3% de volatilidad) y AMD el que más aporta (116,9%, con 72,2% de volatilidad). En el otro extremo, GD30, AL30 y TGNO4 acumulan pérdidas.</p>
-      <p class="tool-tag">Herramienta: Datawrapper</p>
+      <p class="tool-tag">Herramienta: <a id="dwToolLink" href="https://datawrapper.dwcdn.net/v6pot/" target="_blank" rel="noopener">Datawrapper</a></p>
     </section>
 
     <section aria-labelledby="conclusiones-heading">
